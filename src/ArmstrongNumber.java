@@ -9,7 +9,7 @@ public class ArmstrongNumber {
     Scanner input = new Scanner(System.in);
     System.out.println("Enter some number to check if it's an Armstrong number!");
 
-    int inputNumber = input.nextInt();
+    String inputNumber = input.nextLine();
 
     if (checkIfArmstrongNumber(inputNumber)) {
       System.out.println("Hooray! " + inputNumber + " is an exceptionally great Armstrong Number!");
@@ -17,20 +17,21 @@ public class ArmstrongNumber {
 
   }
 
-  private static boolean checkIfArmstrongNumber(int inputNumber) {
-    if (inputNumber == sumOfNthPowers(inputNumber)) {
+  private static boolean checkIfArmstrongNumber(String inputNumber) {
+    if (inputNumber.equals(Integer.toString(sumOfNthPowers(inputNumber)))) {
       return true;
     } else return false;
   }
 
-  private static int sumOfNthPowers(int inputNumber) {
+  private static int sumOfNthPowers(String inputNumber) {
+
+    String[] splitInput = inputNumber.split("(?!^)");
 
     int sum = 0;
 
-    String numberSplit = Integer.toString(inputNumber);
-    for (int i = 0; i < numberSplit.length(); i++) {
-      int temp = (int) numberSplit.charAt(i);
-      sum += (int) Math.pow((double) temp, (double) numberSplit.length());
+    for (int i = 0; i < splitInput.length; i++) {
+      int temp = Integer.parseInt(splitInput[i]);
+      sum += (int) Math.pow((double) temp, (double) splitInput.length);
     } return sum;
   }
 }
